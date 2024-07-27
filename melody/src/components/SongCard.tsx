@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import "./style.module.css";
+import "../styles/style.module.css";
 
 interface NftListProps {
   buttonClassName?: string;

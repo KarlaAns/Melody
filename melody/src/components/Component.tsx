@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
-import "./style.module.css";
+import "../styles/style.module.css";
 
 interface Props {
   property1: "line-text-2" | "line-text-1";
