@@ -1,10 +1,59 @@
 import * as React from "react";
+import { useState, useEffect } from "react";
 import { SongCard } from "../components/SongCard";
 import { Header } from "../components/Header";
+import axios from 'axios';
+
+const CLIENT_ID = '352717a76cfa46d18108a64a4fba3410';
+const CLIENT_SECRET = '454e7d3f3e9742a3b805d791afbd30b0';
+
 const Home: React.FC = () => {
+  const [songs, setSongs] = useState<any[]>([]);
+  const [selectedGenre, setSelectedGenre] = useState<string>('Pop');
+
+  React.useEffect(() => {
+    const fetchData = async (genre: string) => {
+      try {
+        const tokenResponse = await axios.post('https://accounts.spotify.com/api/token', null, {
+          params: {
+            grant_type: 'client_credentials'
+          },
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': `Basic ${btoa(`${CLIENT_ID}:${CLIENT_SECRET}`)}`
+          }
+        });
+
+        const accessToken = tokenResponse.data.access_token;
+        const response = await axios.get(`https://api.spotify.com/v1/recommendations?seed_genres=${genre.toLowerCase()}`, {
+          headers: {
+            'Authorization': `Bearer ${accessToken}`
+          }
+        });
+        
+        setSongs(response.data.tracks);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData(selectedGenre);
+  }, [selectedGenre]);
+
+  const handleGenreClick = (genre: string) => {
+    setSelectedGenre(genre);
+  };
+  
+  const genres = [
+    "Pop",
+    "Rock",
+    "Jazz",
+    "Electronic",
+    "Classical",
+  ]
   return (
     <div className="flex flex-col pb-20 bg-neutral-950">
-      <div className="fixed top-0 left-0 w-full ">
+      <div className="fixed top-0 left-0 w-full z-50">
         <Header />
       </div>
       <div className="flex flex-row mt-48 ml-10 max-w-full max-md:mt-10">
@@ -98,11 +147,11 @@ const Home: React.FC = () => {
           <div className="flex gap-5 max-md:flex-col">
             <div className="flex flex-col w-6/12 max-md:ml-0 max-md:w-full">
               <div className="grow max-md:mt-10 max-md:max-w-full">
-                  <img
-                    loading="lazy"
-                    src="/images/market.png"
-                    className="max-w-full shadow-lg rgba(0, 0, 0, 0.3)"
-                  />
+                <img
+                  loading="lazy"
+                  src="/images/market.png"
+                  className="max-w-full shadow-lg rgba(0, 0, 0, 0.3)"
+                />
               </div>
             </div>
             <div className="flex flex-col ml-5 w-6/12 max-md:ml-0 max-md:w-full">
@@ -126,148 +175,64 @@ const Home: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className="mt-52 text-7xl text-white max-md:mt-10 max-md:max-w-full max-md:text-4xl">
-          Comparte tus gustos
+        <div className="self-center mt-40 w-full max-w-[1381px] max-md:mt-10 max-md:max-w-full">
+          <div className="text-white max-md:ml-0 max-md:max-w-full">
+            <div className="text-7xl text-center max-md:text-4xl">
+              Tus artistas favoritos
+            </div>
+            <div className="text-4xl text-center max-md:text-2xl">
+              ahora en Melody
+            </div>
+            <div className="flex gap-4 self-end mt-32 text-base max-md:flex-wrap max-md:mt-10">
+              <div className="grow my-auto text-xl">Muisc Genre:</div>
+              {genres.map((genre) => (
+                <button
+                  key={genre}
+                  onClick={() => handleGenreClick(genre)}
+                  className="px-4 py-2 text-lg font-light text-white border border-white rounded-full"
+                >
+                  {genre}
+                </button>
+              ))}
+            </div>
+            <div className="flex flex-wrap gap-6 justify-center mt-20 max-md:mt-10">
+              {songs.map((song, index) => (
+                <SongCard
+                  key={song.id}
+                  title={song.name}
+                  artist={song.artists.map((artist: any) => artist.name).join(", ")}
+                  album={song.album.name}
+                  coverUrl={song.album.images[0]?.url || ""}
+                />
+              ))}
+            </div>
+          </div>
         </div>
-        <div className="mt-52 max-md:pr-5 max-md:mt-10 max-md:max-w-full">
+        <div className="self-center w-full max-w-[1321px] max-md:max-w-full">
           <div className="flex gap-5 max-md:flex-col">
-            <div className="flex flex-col w-[39%] max-md:ml-0 max-md:w-full">
-              <div className="flex flex-col grow text-white max-md:mt-10">
-                <div className="text-6xl font-semibold max-md:text-4xl">
-                  01/
-                </div>
-                <div className="mt-11 text-lg font-light max-md:mt-10">
-                  Escucha toda la música que desees
-                </div>
+            <div className="flex flex-col mt-24 text-lg font-light text-white max-md:mt-10 max-md:max-w-full">
+              <div className="text-6xl max-md:max-w-full max-md:text-4xl">
+                ¡Disfruta de tus canciones <br />
+                preferidas sin anuncios!
+              </div>
+              <div className="mt-7 leading-7 max-md:mt-10 max-md:max-w-full">
+                Melody tiene uno de los catálogos más grandes en el mundo de la
+                música. ¡Actualizamos diariamente nuestra lista para que
+                escuches los últimos hits sin descargar nada!
               </div>
             </div>
-            <div className="flex flex-col ml-5 w-[34%] max-md:ml-0 max-md:w-full">
-              <div className="flex flex-col grow text-white max-md:mt-10">
-                <div className="text-6xl font-semibold max-md:text-4xl">
-                  02/
-                </div>
-                <div className="mt-11 text-lg font-light max-md:mt-10">
-                  Añadela a tu playlist personal
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-col ml-5 w-[27%] max-md:ml-0 max-md:w-full">
-              <div className="flex flex-col grow text-white max-md:mt-10">
-                <div className="text-6xl font-semibold max-md:text-4xl">
-                  03/
-                </div>
-                <div className="mt-11 text-lg font-light max-md:mt-10">
-                  Compartela con todos tus amigos
-                </div>
-              </div>
+            <div className="flex flex-col max-md:ml-0 max-md:mt-10 max-md:max-w-full">
+              <img
+                loading="lazy"
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/8152dca2be265cfa14a510efb730cd83ab62a8ac45f100251fbcb6a83fc3ddfc?"
+                className="w-full max-md:max-w-full"
+              />
             </div>
           </div>
-        </div>
-        <div className="flex gap-5 mt-64 w-full text-white max-md:flex-wrap max-md:mt-10 max-md:max-w-full">
-          <div className="flex-auto text-7xl max-md:text-4xl">
-            Descubre Melody
-          </div>
-          <div className="flex gap-4 self-end mt-32 text-base max-md:flex-wrap max-md:mt-10">
-            <div className="grow my-auto text-xl">Muisc Genre</div>
-            <div className="px-5 py-2.5 whitespace-nowrap border border-solid border-neutral-400 rounded-[50px]">
-              Rock
-            </div>
-            <div className="px-5 py-2.5 whitespace-nowrap border border-solid border-neutral-400 rounded-[50px]">
-              Pop
-            </div>
-            <div className="px-5 py-2.5 whitespace-nowrap border border-solid border-neutral-400 rounded-[50px]">
-              K-Pop
-            </div>
-            <div className="px-5 py-2.5 whitespace-nowrap border border-solid border-neutral-400 rounded-[50px]">
-              Jazz
-            </div>
-            <div className="px-5 py-2.5 whitespace-nowrap border border-solid border-neutral-400 rounded-[50px]">
-              Funk
-            </div>
-          </div>
-        </div>
-        <div className="mt-24 max-md:mt-10 max-md:max-w-full flex justify-center">
-          <div className="flex gap-5 max-md:flex-col">
-            <SongCard 
-            songName=""
-            imageUrl=""/>
-            <SongCard 
-            songName=""
-            imageUrl=""/>
-            <SongCard 
-            songName=""
-            imageUrl=""/>
-          </div>
-        </div>
-        <div className="mt-24 max-md:mt-10 max-md:max-w-full flex justify-center">
-          <div className="flex gap-5 max-md:flex-col">
-            <SongCard 
-            songName=""
-            imageUrl=""/>
-            <SongCard 
-            songName=""
-            imageUrl=""/>
-            <SongCard 
-            songName=""
-            imageUrl=""/>
-          </div>
-        </div>
-        <div className="mt-24 max-md:mt-10 max-md:max-w-full flex justify-center">
-          <div className="flex gap-5 max-md:flex-col">
-            <SongCard 
-            songName=""
-            imageUrl=""/>
-            <SongCard 
-            songName=""
-            imageUrl=""/>
-            <SongCard 
-            songName=""
-            imageUrl=""/>
-          </div>
-        </div>
-        <div className="flex gap-2.5 self-center px-8 py-2.5 mt-16 text-lg font-light text-white border border-white border-solid rounded-[50px] max-md:px-5 max-md:mt-10">
-          <div>Descubre más música</div>
-          <img
-            loading="lazy"
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/41cdf6651b08f1a04e8fbc9f30ad6b350d71b5ced3924d31c7e4163b4be66bbf?"
-            className="shrink-0 my-auto w-6 aspect-square"
-          />
-        </div>
-      </div>
-      <div className="flex flex-col px-10 mt-28 w-full text-white max-md:px-5 max-md:mt-10 max-md:max-w-full">
-        <div className="text-5xl max-md:max-w-full max-md:text-4xl">
-          Shape the NFT Music
-        </div>
-        <div className="flex gap-5 justify-between mt-11 w-full text-3xl max-md:flex-wrap max-md:mt-10 max-md:max-w-full">
-          <div className="flex gap-5 items-center whitespace-nowrap max-md:flex-wrap">
-            <div className="grow self-stretch my-auto">Facebook</div>
-            <div className="shrink-0 self-stretch w-px h-12 border border-white border-solid" />
-            <div className="flex-auto self-stretch my-auto">Twittter</div>
-            <div className="shrink-0 self-stretch w-px h-12 border border-white border-solid" />
-            <div className="flex-auto self-stretch my-auto">Medium</div>
-            <div className="shrink-0 self-stretch w-px h-12 border border-white border-solid" />
-            <div className="flex-auto self-stretch my-auto">Contact</div>
-          </div>
-          <div className="flex gap-2.5 my-auto">
-            <img
-              loading="lazy"
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/712ea870b69e1bdd9c6b6c146936f8e3f87fb4ae4ba62c996a030ed3be0c0994?"
-              className="shrink-0 self-start w-6 aspect-square"
-            />
-            <div className="flex-auto">Back to the top</div>
-          </div>
-        </div>
-        <div className="flex gap-5 mt-11 w-full text-lg max-md:flex-wrap max-md:mt-10 max-md:max-w-full">
-          <div className="flex gap-5">
-            <div className="flex-auto">Privacy Policy</div>
-            <div className="flex-auto">Terms and Conditions</div>
-          </div>
-          <div className="flex-auto">Copyright © 2022 Avi Yansah</div>
         </div>
       </div>
     </div>
-
   );
-}
+};
 
 export default Home;
