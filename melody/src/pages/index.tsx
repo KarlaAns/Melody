@@ -1,98 +1,52 @@
 import * as React from "react";
-
+import { SongCard } from "../components/SongCard";
+import { Header } from "../components/Header";
 const Home: React.FC = () => {
   return (
     <div className="flex flex-col pb-20 bg-neutral-950">
-      <div className="flex gap-5 justify-between px-14 pt-3.5 pb-6 w-full bg-white bg-opacity-10 max-md:flex-wrap max-md:px-5 max-md:max-w-full">
-        <div className="text-xl text-white">
-          <span className="font-semibold">Melody</span>
-          <br />
-          Music Platform
-        </div>
-        <div className="flex gap-5 items-center self-start mt-2.5 max-md:flex-wrap">
-          <div className="grow self-stretch my-auto text-base text-white uppercase">
-            Marketplace
-          </div>
-          <div className="self-stretch my-auto text-base text-white uppercase">
-            About
-          </div>
-          <div className="self-stretch my-auto text-base text-white uppercase">
-            Dashboard
-          </div>
-          <div className="self-stretch my-auto text-base text-white uppercase">
-            Download
-          </div>
-          <div className="flex relative flex-col justify-center items-center self-stretch w-8 aspect-[1.07]">
-            <img
-              loading="lazy"
-              src="..."
-              className="object-cover absolute inset-0 size-full"
-            />
-            <img
-              loading="lazy"
-              srcSet="..."
-              className="w-full rounded-full border-2 border-white border-solid aspect-[1.06]"
-            />
-          </div>
-        </div>
-        <div className="flex gap-5 justify-between my-auto">
-          <img
-            loading="lazy"
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/9daa1c1937de38453b403c42ab505f8b92770d16de0e1a5f3402b13e0287e719?"
-            className="shrink-0 aspect-[0.63] w-[15px]"
-          />
-          <img
-            loading="lazy"
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/2851a5d5754b4c8449856fa66c5e2d5ab27dacc496f95293a1f18bd86e0e42a5?"
-            className="shrink-0 w-6 aspect-square"
-          />
-          <img
-            loading="lazy"
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/5977fff4c60fe3b175eaf57a10741ad4a4bb40639ca4d5e45265bd49cc9fc080?"
-            className="shrink-0 w-6 aspect-square"
-          />
-        </div>
+      <div className="fixed top-0 left-0 w-full ">
+        <Header />
       </div>
       <div className="flex flex-row mt-48 ml-10 max-w-full max-md:mt-10">
-  <div className="flex flex-col text-white w-[671px] max-md:mt-10">
-    <div className="text-7xl max-md:max-w-full max-md:text-4xl">
-      Melody.
-    </div>
-    <div className="mt-4 text-6xl max-md:max-w-full max-md:text-4xl">
-      Music for everyone.
-    </div>
-    <div className="mt-9 text-base font-light leading-7 max-md:max-w-full">
-      Explora el extenso mundo de la música y atrévete a escuchar géneros de
-      música y a artistas que nunca habías escuchado antes!
-    </div>
-    <div className="flex gap-5 justify-between self-start mt-16 max-md:mt-10">
-      <div className="flex flex-col self-start mt-1.5 text-sm">
-        <div>Powered by</div>
-        <img
-          loading="lazy"
-          src="https:/cdn.builder.io/api/v1/image/assets/TEMP/90b269e4a4afbae1f441d1a571da5742db126e188f2b11f283dbcc514b4ed59a?"
-          className="self-center mt-2 aspect-[8.33] w-[102px]"
-        />
+        <div className="flex flex-col text-white w-[671px] max-md:mt-10">
+          <div className="text-7xl max-md:max-w-full max-md:text-4xl">
+            Melody.
+          </div>
+          <div className="mt-4 text-6xl max-md:max-w-full max-md:text-4xl">
+            Music for everyone.
+          </div>
+          <div className="mt-9 text-base font-light leading-7 max-md:max-w-full">
+            Explora el extenso mundo de la música y atrévete a escuchar géneros de
+            música y a artistas que nunca habías escuchado antes!
+          </div>
+          <div className="flex gap-5 justify-between self-start mt-16 max-md:mt-10">
+            <div className="flex flex-col self-start mt-1.5 text-sm">
+              <div>Powered by</div>
+              <img
+                loading="lazy"
+                src="https:/cdn.builder.io/api/v1/image/assets/TEMP/90b269e4a4afbae1f441d1a571da5742db126e188f2b11f283dbcc514b4ed59a?"
+                className="self-center mt-2 aspect-[8.33] w-[102px]"
+              />
+            </div>
+            <div className="flex gap-2.5 px-8 py-2.5 text-lg font-light border border-white border-solid rounded-[50px] max-md:px-5">
+              <div>Discover More</div>
+              <img
+                loading="lazy"
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/41cdf6651b08f1a04e8fbc9f30ad6b350d71b5ced3924d31c7e4163b4be66bbf?"
+                className="shrink-0 my-auto w-6 aspect-square"
+              />
+            </div>
+          </div>
+        </div>
+        <div className="ml-10">
+          <img
+            loading="lazy"
+            src="/images/image 5.png"
+            alt="Descripción de la imagen"
+            className="max-w-full h-auto"
+          />
+        </div>
       </div>
-      <div className="flex gap-2.5 px-8 py-2.5 text-lg font-light border border-white border-solid rounded-[50px] max-md:px-5">
-        <div>Discover More</div>
-        <img
-          loading="lazy"
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/41cdf6651b08f1a04e8fbc9f30ad6b350d71b5ced3924d31c7e4163b4be66bbf?"
-          className="shrink-0 my-auto w-6 aspect-square"
-        />
-      </div>
-    </div>
-  </div>
-  <div className="ml-10">
-    <img
-      loading="lazy"
-      src="/images/image 5.png"
-      alt="Descripción de la imagen"
-      className="max-w-full h-auto"
-    />
-  </div>
-</div>
 
       <div className="flex gap-5 mt-52 text-2xl font-light text-white uppercase max-md:flex-wrap max-md:mt-10">
         <div className="grow my-auto">new way to reach the new fan</div>
@@ -144,36 +98,11 @@ const Home: React.FC = () => {
           <div className="flex gap-5 max-md:flex-col">
             <div className="flex flex-col w-6/12 max-md:ml-0 max-md:w-full">
               <div className="grow max-md:mt-10 max-md:max-w-full">
-                <div className="flex gap-5 max-md:flex-col">
-                  <div className="flex flex-col w-6/12 max-md:ml-0 max-md:w-full">
-                    <div className="flex flex-col max-md:mt-10">
-                      <img
-                        loading="lazy"
-                        srcSet="..."
-                        className="max-w-full border border-white border-solid aspect-[0.82] w-[222px]"
-                      />
-                      <img
-                        loading="lazy"
-                        srcSet="..."
-                        className="self-end mt-9 max-w-full aspect-[0.83] w-[222px]"
-                      />
-                    </div>
-                  </div>
-                  <div className="flex flex-col ml-5 w-6/12 max-md:ml-0 max-md:w-full">
-                    <div className="flex flex-col grow items-start mt-14 max-md:mt-10">
-                      <img
-                        loading="lazy"
-                        srcSet="..."
-                        className="w-full aspect-[0.83]"
-                      />
-                      <img
-                        loading="lazy"
-                        srcSet="..."
-                        className="mt-14 ml-3.5 w-full aspect-[0.83] max-md:mt-10 max-md:ml-2.5"
-                      />
-                    </div>
-                  </div>
-                </div>
+                  <img
+                    loading="lazy"
+                    src="/images/vinylDisc.png"
+                    className="max-w-full shadow-lg rgba(0, 0, 0, 0.3)"
+                  />
               </div>
             </div>
             <div className="flex flex-col ml-5 w-6/12 max-md:ml-0 max-md:w-full">
@@ -257,296 +186,25 @@ const Home: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className="mt-24 max-md:mt-10 max-md:max-w-full">
+        <div className="mt-24 max-md:mt-10 max-md:max-w-full flex justify-center">
           <div className="flex gap-5 max-md:flex-col">
-            <div className="flex flex-col w-[33%] max-md:ml-0 max-md:w-full">
-              <div className="flex flex-col grow justify-center max-md:mt-10">
-                <div className="px-14 pt-20 pb-8 max-md:px-5">
-                  <div className="flex gap-5 max-md:flex-col">
-                    <div className="flex flex-col w-6/12 max-md:ml-0 max-md:w-full">
-                      <div className="flex grow gap-2 justify-between px-6 py-3 mt-80 text-base font-light text-white border border-white border-solid rounded-[55px] max-md:px-5 max-md:mt-10">
-                        <div>Play now</div>
-                        <img
-                          loading="lazy"
-                          src="https://cdn.builder.io/api/v1/image/assets/TEMP/2c4ccc8ac1f9cc4e1740479081db9b6e7081b46c59d5265851c4791c9b0a8525?"
-                          className="shrink-0 my-auto aspect-square w-[22px]"
-                        />
-                      </div>
-                    </div>
-                    <div className="flex flex-col ml-5 w-6/12 max-md:ml-0 max-md:w-full">
-                      <div className="grow py-2 mt-80 text-xl font-bold text-white rounded-[55px] max-md:mt-10">
-                        Add to PlayList
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-col ml-5 w-[33%] max-md:ml-0 max-md:w-full">
-              <div className="flex flex-col grow justify-center max-md:mt-10">
-                <div className="px-14 pt-20 pb-8 max-md:px-5">
-                  <div className="flex gap-5 max-md:flex-col">
-                    <div className="flex flex-col w-6/12 max-md:ml-0 max-md:w-full">
-                      <div className="flex grow gap-2 justify-between px-6 py-3 mt-80 text-base font-light text-white border border-white border-solid rounded-[55px] max-md:px-5 max-md:mt-10">
-                        <div>Play now</div>
-                        <img
-                          loading="lazy"
-                          src="https://cdn.builder.io/api/v1/image/assets/TEMP/01b81d0a3f450bbfa594eeb23b5f52466a2949555f1c17035ed606e2674d049f?"
-                          className="shrink-0 my-auto aspect-square w-[22px]"
-                        />
-                      </div>
-                    </div>
-                    <div className="flex flex-col ml-5 w-6/12 max-md:ml-0 max-md:w-full">
-                      <div className="grow py-2 mt-80 text-xl font-bold text-white rounded-[55px] max-md:mt-10">
-                        Add to PlayList
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-col ml-5 w-[33%] max-md:ml-0 max-md:w-full">
-              <div className="flex flex-col grow justify-center max-md:mt-10">
-                <div className="px-14 pt-20 pb-8 max-md:px-5">
-                  <div className="flex gap-5 max-md:flex-col">
-                    <div className="flex flex-col w-6/12 max-md:ml-0 max-md:w-full">
-                      <div className="flex grow gap-2 justify-between px-6 py-3 mt-80 text-base font-light text-white border border-white border-solid rounded-[55px] max-md:px-5 max-md:mt-10">
-                        <div>Play now</div>
-                        <img
-                          loading="lazy"
-                          src="https://cdn.builder.io/api/v1/image/assets/TEMP/27dd1bc9a0147717ce3300b9cbbf0cd599b0bc8eb6b4657ba8f7cd4c59d98c45?"
-                          className="shrink-0 my-auto aspect-square w-[22px]"
-                        />
-                      </div>
-                    </div>
-                    <div className="flex flex-col ml-5 w-6/12 max-md:ml-0 max-md:w-full">
-                      <div className="grow py-2 mt-80 text-xl font-bold text-white rounded-[55px] max-md:mt-10">
-                        Add to PlayList
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <SongCard />
+            <SongCard />
+            <SongCard />
           </div>
         </div>
-        <div className="mt-16 max-md:mt-10 max-md:max-w-full">
+        <div className="mt-24 max-md:mt-10 max-md:max-w-full flex justify-center">
           <div className="flex gap-5 max-md:flex-col">
-            <div className="flex flex-col w-[33%] max-md:ml-0 max-md:w-full">
-              <div className="flex flex-col grow justify-center max-md:mt-10">
-                <div className="px-14 pt-20 pb-8 max-md:px-5">
-                  <div className="flex gap-5 max-md:flex-col">
-                    <div className="flex flex-col w-6/12 max-md:ml-0 max-md:w-full">
-                      <div className="flex grow gap-2 justify-between px-6 py-3 mt-80 text-base font-light text-white border border-white border-solid rounded-[55px] max-md:px-5 max-md:mt-10">
-                        <div>Play now</div>
-                        <img
-                          loading="lazy"
-                          src="https://cdn.builder.io/api/v1/image/assets/TEMP/2c4ccc8ac1f9cc4e1740479081db9b6e7081b46c59d5265851c4791c9b0a8525?"
-                          className="shrink-0 my-auto aspect-square w-[22px]"
-                        />
-                      </div>
-                    </div>
-                    <div className="flex flex-col ml-5 w-6/12 max-md:ml-0 max-md:w-full">
-                      <div className="grow py-2 mt-80 text-xl font-bold text-white rounded-[55px] max-md:mt-10">
-                        Add to PlayList
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-col ml-5 w-[33%] max-md:ml-0 max-md:w-full">
-              <div className="flex flex-col grow justify-center max-md:mt-10">
-                <div className="px-14 pt-20 pb-8 max-md:px-5">
-                  <div className="flex gap-5 max-md:flex-col">
-                    <div className="flex flex-col w-6/12 max-md:ml-0 max-md:w-full">
-                      <div className="flex grow gap-2 justify-between px-6 py-3 mt-80 text-base font-light text-white border border-white border-solid rounded-[55px] max-md:px-5 max-md:mt-10">
-                        <div>Play now</div>
-                        <img
-                          loading="lazy"
-                          src="https://cdn.builder.io/api/v1/image/assets/TEMP/01b81d0a3f450bbfa594eeb23b5f52466a2949555f1c17035ed606e2674d049f?"
-                          className="shrink-0 my-auto aspect-square w-[22px]"
-                        />
-                      </div>
-                    </div>
-                    <div className="flex flex-col ml-5 w-6/12 max-md:ml-0 max-md:w-full">
-                      <div className="grow py-2 mt-80 text-xl font-bold text-white rounded-[55px] max-md:mt-10">
-                        Add to PlayList
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-col ml-5 w-[33%] max-md:ml-0 max-md:w-full">
-              <div className="flex flex-col grow justify-center max-md:mt-10">
-                <div className="px-14 pt-20 pb-8 max-md:px-5">
-                  <div className="flex gap-5 max-md:flex-col">
-                    <div className="flex flex-col w-6/12 max-md:ml-0 max-md:w-full">
-                      <div className="flex grow gap-2 justify-between px-6 py-3 mt-80 text-base font-light text-white border border-white border-solid rounded-[55px] max-md:px-5 max-md:mt-10">
-                        <div>Play now</div>
-                        <img
-                          loading="lazy"
-                          src="https://cdn.builder.io/api/v1/image/assets/TEMP/27dd1bc9a0147717ce3300b9cbbf0cd599b0bc8eb6b4657ba8f7cd4c59d98c45?"
-                          className="shrink-0 my-auto aspect-square w-[22px]"
-                        />
-                      </div>
-                    </div>
-                    <div className="flex flex-col ml-5 w-6/12 max-md:ml-0 max-md:w-full">
-                      <div className="grow py-2 mt-80 text-xl font-bold text-white rounded-[55px] max-md:mt-10">
-                        Add to PlayList
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <SongCard />
+            <SongCard />
+            <SongCard />
           </div>
         </div>
-        <div className="mt-16 max-md:mt-10 max-md:max-w-full">
+        <div className="mt-24 max-md:mt-10 max-md:max-w-full flex justify-center">
           <div className="flex gap-5 max-md:flex-col">
-            <div className="flex flex-col w-[33%] max-md:ml-0 max-md:w-full">
-              <div className="flex flex-col grow justify-center max-md:mt-10">
-                <div className="px-14 pt-20 pb-8 max-md:px-5">
-                  <div className="flex gap-5 max-md:flex-col">
-                    <div className="flex flex-col w-6/12 max-md:ml-0 max-md:w-full">
-                      <div className="flex grow gap-2 justify-between px-6 py-3 mt-80 text-base font-light text-white border border-white border-solid rounded-[55px] max-md:px-5 max-md:mt-10">
-                        <div>Play now</div>
-                        <img
-                          loading="lazy"
-                          src="https://cdn.builder.io/api/v1/image/assets/TEMP/2c4ccc8ac1f9cc4e1740479081db9b6e7081b46c59d5265851c4791c9b0a8525?"
-                          className="shrink-0 my-auto aspect-square w-[22px]"
-                        />
-                      </div>
-                    </div>
-                    <div className="flex flex-col ml-5 w-6/12 max-md:ml-0 max-md:w-full">
-                      <div className="grow py-2 mt-80 text-xl font-bold text-white rounded-[55px] max-md:mt-10">
-                        Add to PlayList
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-col ml-5 w-[33%] max-md:ml-0 max-md:w-full">
-              <div className="flex flex-col grow justify-center max-md:mt-10">
-                <div className="px-14 pt-20 pb-8 max-md:px-5">
-                  <div className="flex gap-5 max-md:flex-col">
-                    <div className="flex flex-col w-6/12 max-md:ml-0 max-md:w-full">
-                      <div className="flex grow gap-2 justify-between px-6 py-3 mt-80 text-base font-light text-white border border-white border-solid rounded-[55px] max-md:px-5 max-md:mt-10">
-                        <div>Play now</div>
-                        <img
-                          loading="lazy"
-                          src="https://cdn.builder.io/api/v1/image/assets/TEMP/01b81d0a3f450bbfa594eeb23b5f52466a2949555f1c17035ed606e2674d049f?"
-                          className="shrink-0 my-auto aspect-square w-[22px]"
-                        />
-                      </div>
-                    </div>
-                    <div className="flex flex-col ml-5 w-6/12 max-md:ml-0 max-md:w-full">
-                      <div className="grow py-2 mt-80 text-xl font-bold text-white rounded-[55px] max-md:mt-10">
-                        Add to PlayList
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-col ml-5 w-[33%] max-md:ml-0 max-md:w-full">
-              <div className="flex flex-col grow justify-center max-md:mt-10">
-                <div className="px-14 pt-20 pb-8 max-md:px-5">
-                  <div className="flex gap-5 max-md:flex-col">
-                    <div className="flex flex-col w-6/12 max-md:ml-0 max-md:w-full">
-                      <div className="flex grow gap-2 justify-between px-6 py-3 mt-80 text-base font-light text-white border border-white border-solid rounded-[55px] max-md:px-5 max-md:mt-10">
-                        <div>Play now</div>
-                        <img
-                          loading="lazy"
-                          src="https://cdn.builder.io/api/v1/image/assets/TEMP/27dd1bc9a0147717ce3300b9cbbf0cd599b0bc8eb6b4657ba8f7cd4c59d98c45?"
-                          className="shrink-0 my-auto aspect-square w-[22px]"
-                        />
-                      </div>
-                    </div>
-                    <div className="flex flex-col ml-5 w-6/12 max-md:ml-0 max-md:w-full">
-                      <div className="grow py-2 mt-80 text-xl font-bold text-white rounded-[55px] max-md:mt-10">
-                        Add to PlayList
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="mt-16 max-md:mt-10 max-md:max-w-full">
-          <div className="flex gap-5 max-md:flex-col">
-            <div className="flex flex-col w-[33%] max-md:ml-0 max-md:w-full">
-              <div className="flex flex-col grow justify-center max-md:mt-10">
-                <div className="px-14 pt-20 pb-8 max-md:px-5">
-                  <div className="flex gap-5 max-md:flex-col">
-                    <div className="flex flex-col w-6/12 max-md:ml-0 max-md:w-full">
-                      <div className="flex grow gap-2 justify-between px-6 py-3 mt-80 text-base font-light text-white border border-white border-solid rounded-[55px] max-md:px-5 max-md:mt-10">
-                        <div>Play now</div>
-                        <img
-                          loading="lazy"
-                          src="https://cdn.builder.io/api/v1/image/assets/TEMP/2c4ccc8ac1f9cc4e1740479081db9b6e7081b46c59d5265851c4791c9b0a8525?"
-                          className="shrink-0 my-auto aspect-square w-[22px]"
-                        />
-                      </div>
-                    </div>
-                    <div className="flex flex-col ml-5 w-6/12 max-md:ml-0 max-md:w-full">
-                      <div className="grow py-2 mt-80 text-xl font-bold text-white rounded-[55px] max-md:mt-10">
-                        Add to PlayList
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-col ml-5 w-[33%] max-md:ml-0 max-md:w-full">
-              <div className="flex flex-col grow justify-center max-md:mt-10">
-                <div className="px-14 pt-20 pb-8 max-md:px-5">
-                  <div className="flex gap-5 max-md:flex-col">
-                    <div className="flex flex-col w-6/12 max-md:ml-0 max-md:w-full">
-                      <div className="flex grow gap-2 justify-between px-6 py-3 mt-80 text-base font-light text-white border border-white border-solid rounded-[55px] max-md:px-5 max-md:mt-10">
-                        <div>Play now</div>
-                        <img
-                          loading="lazy"
-                          src="https://cdn.builder.io/api/v1/image/assets/TEMP/01b81d0a3f450bbfa594eeb23b5f52466a2949555f1c17035ed606e2674d049f?"
-                          className="shrink-0 my-auto aspect-square w-[22px]"
-                        />
-                      </div>
-                    </div>
-                    <div className="flex flex-col ml-5 w-6/12 max-md:ml-0 max-md:w-full">
-                      <div className="grow py-2 mt-80 text-xl font-bold text-white rounded-[55px] max-md:mt-10">
-                        Add to PlayList
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-col ml-5 w-[33%] max-md:ml-0 max-md:w-full">
-              <div className="flex flex-col grow justify-center max-md:mt-10">
-                <div className="px-14 pt-20 pb-8 max-md:px-5">
-                  <div className="flex gap-5 max-md:flex-col">
-                    <div className="flex flex-col w-6/12 max-md:ml-0 max-md:w-full">
-                      <div className="flex grow gap-2 justify-between px-6 py-3 mt-80 text-base font-light text-white border border-white border-solid rounded-[55px] max-md:px-5 max-md:mt-10">
-                        <div>Play now</div>
-                        <img
-                          loading="lazy"
-                          src="https://cdn.builder.io/api/v1/image/assets/TEMP/27dd1bc9a0147717ce3300b9cbbf0cd599b0bc8eb6b4657ba8f7cd4c59d98c45?"
-                          className="shrink-0 my-auto aspect-square w-[22px]"
-                        />
-                      </div>
-                    </div>
-                    <div className="flex flex-col ml-5 w-6/12 max-md:ml-0 max-md:w-full">
-                      <div className="grow py-2 mt-80 text-xl font-bold text-white rounded-[55px] max-md:mt-10">
-                        Add to PlayList
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <SongCard />
+            <SongCard />
+            <SongCard />
           </div>
         </div>
         <div className="flex gap-2.5 self-center px-8 py-2.5 mt-16 text-lg font-light text-white border border-white border-solid rounded-[50px] max-md:px-5 max-md:mt-10">
@@ -590,6 +248,7 @@ const Home: React.FC = () => {
         </div>
       </div>
     </div>
+
   );
 }
 

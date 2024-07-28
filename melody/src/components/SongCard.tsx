@@ -1,76 +1,39 @@
-"use client";
-import React from "react";
-import "../styles/style.module.css";
+import * as React from "react";
 
-interface NftListProps {
-  buttonClassName?: string;
-  buttonClassNameOverride?: string;
-  className?: string;
-  divClassName?: string;
-  divClassName1?: string;
-  divClassName2?: string;
-  divClassNameOverride?: string;
-  groupClassName?: string;
-  groupClassNameOverride?: string;
-  heartSolClassName?: string;
-  img?: string;
-  overlapClassName?: string;
-  overlapGroupClassName?: string;
-  play?: string;
-  playClassName?: string;
-  rectangle?: string;
-  rectangleClassName?: string;
-  rectangleClassNameOverride?: string;
-  text?: string;
-  vector?: string;
-  vectorClassName?: string;
-}
-
-export const NftList = ({
-  buttonClassName,
-  buttonClassNameOverride,
-  className,
-  divClassName,
-  divClassName1,
-  divClassName2,
-  divClassNameOverride,
-  groupClassName,
-  groupClassNameOverride,
-  heartSolClassName,
-  img,
-  overlapClassName,
-  overlapGroupClassName,
-  play,
-  playClassName,
-  rectangle,
-  rectangleClassName,
-  rectangleClassNameOverride,
-  text,
-  vector,
-  vectorClassName,
-}: NftListProps): JSX.Element => {
+export const SongCard = () => {
   return (
-    <div className={`NFT-list ${className}`}>
-      <div className={overlapClassName}>
-        <div className={`group ${groupClassName} ${groupClassNameOverride}`}>
-          <div className={`overlap-group ${overlapGroupClassName}`}>
-            <div className={heartSolClassName}>Heart &amp; Sol</div>
-            <img className={rectangleClassName} alt="Rectangle" src={rectangle} />
-            <div className={divClassName}>
-              <div className={divClassName1}>0.3234</div>
-              <div className={divClassName2}>16 tokens</div>
-              <img className={vectorClassName} alt="Vector" src={vector} />
-            </div>
-            <img className={img} alt="Rectangle" src={img} />
-          </div>
+    <div className="flex flex-col bg-[#181818] text-white p-4 rounded-lg w-[368px] shadow-lg">
+      <div className="relative">
+        <img
+          src="/images/Rectangle 9.png" 
+          alt="Album Cover"
+          className="object-cover w-full h-full rounded-t-lg"
+        />
+      </div>
+      <div className="p-4">
+        <h2 className="text-xl font-semibold">Heart & Sol</h2>
+        <div className="flex items-center mt-2">
+          <img
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/2140260c93daee2e67615b07334bc768711ee7f934c2f620d4d8f2c280d54626?"
+            alt="Currency Icon"
+            className="w-4 h-4"
+          />
+          <span className="ml-2 text-sm">0.3234</span>
+          <span className="ml-4 text-sm">16 tokens</span>
         </div>
-        <button className={`button ${buttonClassName} ${buttonClassNameOverride}`}>
-          <div className="text-wrapper-3">{text}</div>
-          <img className={playClassName} alt="Play" src={play} />
-        </button>
-        <button className="div-wrapper">
-          <div className="text-wrapper-4">BUY NFT</div>
-        </button>
+        <div className="flex mt-4">
+          <button className="flex items-center justify-center gap-2 px-4 py-2 mr-2 text-sm font-light text-white border border-white rounded-full">
+            Play now
+            <img
+              src="https://cdn.builder.io/api/v1/image/assets/TEMP/2140260c93daee2e67615b07334bc768711ee7f934c2f620d4d8f2c280d54626?"
+              alt="Play Icon"
+              className="w-4 h-4"
+            />
+          </button>
+          <button className="px-6 py-2 text-sm font-bold text-white bg-gradient-to-r from-green-400 to-blue-500 rounded-full">
+            BUY NFT
+          </button>
+        </div>
       </div>
     </div>
   );
