@@ -6,28 +6,32 @@ import Footer from "../components/Footer";
 import GradientEllipses from "../components/GradientEllipses";
 import Ellipse21 from "../components/Ellipse21";
 import Marquee from '../components/Marquee';
-
 import axios from 'axios';
 
-const CLIENT_ID = '352717a76cfa46d18108a64a4fba3410';
-const CLIENT_SECRET = '454e7d3f3e9742a3b805d791afbd30b0';
+const CLIENT_ID = process.env.CLIENT_ID;
+const CLIENT_SECRET = process.env.CLIENT_SECRET;
 
 const Home: React.FC = () => {
   const [songs, setSongs] = useState<any[]>([]);
   const [selectedGenre, setSelectedGenre] = useState<string>('Pop');
 
-  React.useEffect(() => {
+  useEffect(() => {
+    console.log('Client ID:', CLIENT_ID);
+    console.log('Client Secret:', CLIENT_SECRET);
+
     const fetchData = async (genre: string) => {
       try {
-        const tokenResponse = await axios.post('https://accounts.spotify.com/api/token', null, {
-          params: {
-            grant_type: 'client_credentials'
-          },
+        const credentials = btoa(`${CLIENT_ID}:${CLIENT_SECRET}`);
+        console.log('Credentials:', credentials);  // Depuración de credenciales
+
+        const tokenResponse = await axios.post('https://accounts.spotify.com/api/token', 'grant_type=client_credentials', {
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
-            'Authorization': `Basic ${btoa(`${CLIENT_ID}:${CLIENT_SECRET}`)}`
+            'Authorization': `Basic ${credentials}`
           }
         });
+
+        console.log('Token Response:', tokenResponse.data);  // Depuración de la respuesta del token
 
         const accessToken = tokenResponse.data.access_token;
         const response = await axios.get(`https://api.spotify.com/v1/recommendations?seed_genres=${genre.toLowerCase()}`, {
@@ -35,10 +39,10 @@ const Home: React.FC = () => {
             'Authorization': `Bearer ${accessToken}`
           }
         });
-        
+
         setSongs(response.data.tracks);
       } catch (error) {
-        console.error(error);
+        console.error('Error fetching data:', error);  // Depuración de errores
       }
     };
 
@@ -48,14 +52,14 @@ const Home: React.FC = () => {
   const handleGenreClick = (genre: string) => {
     setSelectedGenre(genre);
   };
-  
+
   const genres = [
     "Pop",
     "Rock",
     "Jazz",
     "Electronic",
     "Classical",
-  ]
+  ];
   return (
     <div className="flex flex-col pb-20 bg-neutral-950 overflow-x-hidden">
       <div className="fixed top-0 left-0 w-full z-50">
