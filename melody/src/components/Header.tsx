@@ -10,7 +10,7 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({ className }) => {
     return( 
     
-    <div className="backdrop-blur-sm flex gap-5 justify-between px-14 pt-3.5 pb-6 w-full bg-white bg-opacity-10 max-md:flex-wrap max-md:px-5 max-md:max-w-full  ">
+    <div className="backdrop-blur-sm flex gap-5 justify-between px-14 pt-3.5 pb-6 w-full bg-white bg-opacity-10 max-md:flex-wrap max-md:px-5  overflow-x-hidden ">
     <div className="text-xl text-white">
       
       <span className="font-semibold">Melody</span>

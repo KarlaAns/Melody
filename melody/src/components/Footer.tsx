@@ -9,7 +9,7 @@ interface FooterProps {
 
 const Footer: React.FC<FooterProps> = ({ className }) => {
   return (
-    <footer className="flex flex-col px-10 w-full text-white mt-[2380px] max-md:px-5 max-md:mt-10 max-md:max-w-full {`footer ${className}`}">
+    <footer className="flex flex-col px-10 w-full text-white mt-[60px] max-md:px-5 max-md:mt-10 max-md:max-w-full ">
       <h2 className="text-5xl max-md:max-w-full max-md:text-4xl">Shape the NFT Music</h2>
       <div className="flex gap-2.5 mt-11 max-md:flex-wrap max-md:mt-10">
         <div className="flex flex-col self-start mt-3">

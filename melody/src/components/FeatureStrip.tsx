@@ -1,4 +1,5 @@
 import React from 'react';
+import Marquee from './Marquee';
 
 type FeatureProps = {
   text: string;
@@ -13,9 +14,8 @@ const Feature: React.FC<FeatureProps> = ({ text }) => (
 
 const FeatureStrip: React.FC = () => (
   <section className="flex gap-5 mt-52 text-2xl font-light text-white uppercase max-md:flex-wrap max-md:mt-10">
-    <Feature text="new way to reach the new fan" />
-    <Feature text="new way to reach the new fan" />
-    <Feature text="new way to reach the new fan" />
+  <Marquee />
+
   </section>
 );
 

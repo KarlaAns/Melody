@@ -3,7 +3,8 @@ import Layout from './LayoutDashB';
 import MusicGenre from '../components/MusicGenre';
 import PlaylistCard from '../components/PlaylistCard';
 import ArtistCard from '../components/ArtistCard';
-import { SongCard } from "../components/SongCard";
+import Ellipse21 from '../components/Ellipse21';
+import Marquee from '../components/Marquee';
 
 
 const Dashboard: React.FC = () => {
@@ -26,16 +27,9 @@ const Dashboard: React.FC = () => {
 
   return (
     <Layout>
-      <div className="mt-7 w-full border border-white border-solid min-h-[1px] max-md:max-w-full" />
-      <div className="flex gap-5 mt-5 text-2xl font-light text-white uppercase max-md:flex-wrap">
-        <div className="grow my-auto">new way to reach the new fan</div>
-        <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/0e21107f2dee2ed0838f97058503ba8801abbaf494e426bf4665fd07d6e8c599?apiKey=a78f6d67d7bc412983425b620122d734&&apiKey=a78f6d67d7bc412983425b620122d734" className="shrink-0 w-9 aspect-square" alt="" />
-        <div className="flex-auto my-auto">new way to reach the new fan</div>
-        <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/0e21107f2dee2ed0838f97058503ba8801abbaf494e426bf4665fd07d6e8c599?apiKey=a78f6d67d7bc412983425b620122d734&&apiKey=a78f6d67d7bc412983425b620122d734" className="shrink-0 w-9 aspect-square" alt="" />
-        <div className="flex-auto my-auto">new way to reach the new fan</div>
-        <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/0e21107f2dee2ed0838f97058503ba8801abbaf494e426bf4665fd07d6e8c599?apiKey=a78f6d67d7bc412983425b620122d734&&apiKey=a78f6d67d7bc412983425b620122d734" className="shrink-0 w-9 aspect-square" alt="" />
+      <div className="relative top-[-110px]">
+      <Marquee />
       </div>
-      <div className="mt-5 w-full border border-white border-solid min-h-[1px] max-md:max-w-full" />
       <section className="flex gap-5 items-start self-center px-5 mt-12 w-full text-white max-w-[1360px] max-md:flex-wrap max-md:mt-10 max-md:max-w-full">
         <h1 className="flex-auto self-start text-7xl max-md:max-w-full max-md:text-4xl">
           Canciones <span className="text-7xl">Recomendadas</span>
@@ -43,17 +37,7 @@ const Dashboard: React.FC = () => {
         <MusicGenre />
       </section>
       {/* <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/109684e1-fe97-4601-b449-12d5d2ea8a33?apiKey=a78f6d67d7bc412983425b620122d734&&apiKey=a78f6d67d7bc412983425b620122d734" className="mt-24 w-full aspect-[2.94] max-md:mt-10 max-md:max-w-full" alt="Music recommendation banner" /> */}
-      <div className="flex gap-5 max-md:flex-col">
-            <SongCard 
-            songName=""
-            imageUrl=""/>
-            <SongCard 
-            songName=""
-            imageUrl=""/>
-            <SongCard 
-            songName=""
-            imageUrl=""/>
-          </div>
+      
       <section className="flex flex-col items-center pl-11 mt-24 w-full max-md:pl-5 max-md:mt-10 max-md:max-w-full">
         <div className="self-stretch max-md:pr-5 max-md:max-w-full">
           <div className="flex gap-5 max-md:flex-col">
@@ -64,16 +48,23 @@ const Dashboard: React.FC = () => {
         </div>
         <button className="flex gap-2.5 px-8 py-2.5 mt-24 ml-6 text-lg font-light text-white border border-white border-solid rounded-[50px] max-md:px-5 max-md:mt-10">
           <span>Descubre más canciones</span>
+          
           <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/41cdf6651b08f1a04e8fbc9f30ad6b350d71b5ced3924d31c7e4163b4be66bbf?apiKey=a78f6d67d7bc412983425b620122d734&&apiKey=a78f6d67d7bc412983425b620122d734" className="shrink-0 my-auto w-6 aspect-square" alt="" />
         </button>
-        <div className="mt-20 max-w-full w-[872px] max-md:mt-10">
-          <h2 className="text-3xl font-semibold text-white">Artistas Populares</h2>
-          <div className="flex gap-5 mt-7 text-2xl font-semibold text-white">
-            {artists.map((artist, index) => (
-              <ArtistCard key={index} name={artist.name} imageUrl={artist.imageUrl} />
-            ))}
-          </div>
-        </div>
+        
+        <div className="relative mt-20 max-w-full w-[872px] max-md:mt-10">
+  {/* Asegúrate de que el contenido se muestre encima de Ellipse21 */}
+  <div className="relative z-10">
+    <h2 className="text-3xl font-semibold text-white">Artistas Populares</h2>
+    <div className="flex gap-5 mt-7 text-2xl font-semibold text-white">
+      {artists.map((artist, index) => (
+        <ArtistCard key={index} name={artist.name} imageUrl={artist.imageUrl} />
+      ))}
+    </div>
+  </div>
+  
+  
+</div>
       </section>
       <h2 className="self-start mt-24 ml-11 text-7xl text-white max-md:mt-10 max-md:ml-2.5 max-md:text-4xl">
         PlayLists

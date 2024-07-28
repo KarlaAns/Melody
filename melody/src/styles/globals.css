@@ -1543,4 +1543,31 @@
   }
   
 
+  .marquee-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .marquee-content {
+    display: flex;
+    white-space: nowrap;
+    animation: marquee 20s linear infinite;
+    margin: 10px 0;
+  }
+  
+  .marquee-item {
+    margin-right: 2rem;
+  }
+  
+  @keyframes marquee {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  
+  
   

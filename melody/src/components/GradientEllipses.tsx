@@ -7,7 +7,7 @@ interface GradientEllipsesProps {
 
 const GradientEllipses: React.FC<GradientEllipsesProps> = ({ className }) => {
   return (
-    <div className="absolute top-[-550px] left-[-900px] w-full h-full z-1">
+    <div className="absolute top-[-550px] left-[-900px] w-full h-full z-1 ">
       <div className="relative h-[1080.26px]">
         <div className="absolute left-[781.13px] top-0 w-[697.41px] h-[818.52px] bg-gradient-to-br from-[#7000FF] to-[#06FFF0] rounded-full blur-[133.97px] rotate-[54.351deg]"></div>
         <div className="relative w-[904px] h-[845.26px]">

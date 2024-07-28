@@ -13,8 +13,7 @@ const HowItWorks: React.FC = () => (
           </div>
         </div>
         <div className="flex flex-col ml-5 w-2/5 max-md:ml-0 max-md:w-full">
-          <div className="flex relative flex-col grow justify-center items-start border border-white border-solid min-h-[416px] max-md:mt-10 max-md:max-w-full">
-            <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/d8e9ea4e5cc9b1494258d392550591020c6f3d9655a30e6f505b003f19c6c0b2?apiKey=a78f6d67d7bc412983425b620122d734&&apiKey=a78f6d67d7bc412983425b620122d734" className="object-cover absolute inset-0 size-full" alt="Background" />
+          <div className="flex relative flex-col grow justify-center items-start  border-solid min-h-[416px] max-md:mt-10 max-md:max-w-full">
             <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/279e471732afcde23694b643c6897fa31e6bab272b61ff29348ceda6af6fe988?apiKey=a78f6d67d7bc412983425b620122d734&&apiKey=a78f6d67d7bc412983425b620122d734" className="z-10 mt-0 w-full aspect-square max-md:max-w-full" alt="Foreground" />
           </div>
         </div>
