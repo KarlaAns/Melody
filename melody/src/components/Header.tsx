@@ -1,4 +1,8 @@
 import React from "react";
+import Link from 'next/link';
+
+
+
 
 export const Header = () => {
     return( 
@@ -10,16 +14,22 @@ export const Header = () => {
     </div>
     <nav className="flex gap-5 items-center self-start mt-2.5 max-md:flex-wrap">
       <div className="grow self-stretch my-auto text-base text-white uppercase">
-        <a href="#marketplace" className="no-underline hover:underline">Marketplace</a>
+        <Link href="/">
+        Home
+        </Link>
       </div>
       <div className="self-stretch my-auto text-base text-white uppercase">
         <a href="#about" className="no-underline hover:underline">About</a>
       </div>
       <div className="self-stretch my-auto text-base text-white uppercase">
-        <a href="#dashboard" className="no-underline hover:underline">Dashboard</a>
+        <Link href="/dashboard">
+        Dashboard        
+        </Link>
       </div>
       <div className="self-stretch my-auto text-base text-white uppercase">
-        <a href="#download" className="no-underline hover:underline">Download</a>
+        <Link href="/download">
+        Download
+        </Link>
       </div>
     </nav>
     <div className="flex gap-5 justify-between my-auto">
