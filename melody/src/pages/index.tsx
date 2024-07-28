@@ -1,13 +1,25 @@
 import * as React from "react";
 import { SongCard } from "../components/SongCard";
 import { Header } from "../components/Header";
+import GradientEllipses from '../components/GradientEllipses';
+import Ellipse21 from '../components/Ellipse21';
+import Ellipse18 from '../components/Ellipse18';
+
+
+
+
 const Home: React.FC = () => {
   return (
     <div className="flex flex-col pb-20 bg-neutral-950">
-      <div className="fixed top-0 left-0 w-full ">
-        <Header />
+
+      <div className="fixed top-0 left-0 w-full z-50">
+        
+        <Header /> 
+
       </div>
-      <div className="flex flex-row mt-48 ml-10 max-w-full max-md:mt-10">
+      <GradientEllipses />
+
+      <div className="flex flex-row mt-48 ml-10 max-w-full max-md:mt-10 relative z-20">
         <div className="flex flex-col text-white w-[671px] max-md:mt-10">
           <div className="text-7xl max-md:max-w-full max-md:text-4xl">
             Melody.
@@ -38,12 +50,12 @@ const Home: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className="ml-10">
+        <div className="relative ml-10 ">
           <img
             loading="lazy"
             src="/images/image 5.png"
             alt="Descripción de la imagen"
-            className="max-w-full h-auto"
+            className="max-w-[550px] h-auto absolute top-[-190px] left-[25px] z-6"
           />
         </div>
       </div>
@@ -85,13 +97,16 @@ const Home: React.FC = () => {
                 </div>
               </div>
             </div>
-            <div className="flex flex-col ml-5 w-6/12 max-md:ml-0 max-md:w-full">
-              <img
-                loading="lazy"
-                srcSet="..."
-                className="grow w-full aspect-[1.12] max-md:mt-10 max-md:max-w-full"
-              />
-            </div>
+            <Ellipse21 />
+            <div className="grow max-md:mt-10 max-md:max-w-full z-0 p-0 m-0">
+  <img
+    loading="lazy"
+    srcSet="/images/queesmelody.png"
+    className="w-full h-auto shadow-lg"
+    style={{ display: 'block' }} // Elimina el margen interno si está presente
+  />
+</div>
+
           </div>
         </div>
         <div className="self-center mt-20 w-full max-w-[1171px] max-md:mt-10 max-md:max-w-full">
@@ -130,9 +145,12 @@ const Home: React.FC = () => {
           Comparte tus gustos
         </div>
         <div className="mt-52 max-md:pr-5 max-md:mt-10 max-md:max-w-full">
-          <div className="flex gap-5 max-md:flex-col">
+
+          <div className="relative flex gap-5 max-md:flex-col">
+
             <div className="flex flex-col w-[39%] max-md:ml-0 max-md:w-full">
               <div className="flex flex-col grow text-white max-md:mt-10">
+                
                 <div className="text-6xl font-semibold max-md:text-4xl">
                   01/
                 </div>
@@ -141,24 +159,26 @@ const Home: React.FC = () => {
                 </div>
               </div>
             </div>
-            <div className="flex flex-col ml-5 w-[34%] max-md:ml-0 max-md:w-full">
-              <div className="flex flex-col grow text-white max-md:mt-10">
+            <div className="flex flex-col ml-5 w-[34%] max-md:ml-0 max-md:w-full relative">
+            <Ellipse18 />
+              <div className="flex flex-col grow text-white max-md:mt-10 relative z-10">
                 <div className="text-6xl font-semibold max-md:text-4xl">
                   02/
                 </div>
-                <div className="mt-11 text-lg font-light max-md:mt-10">
+                <div className="mt-11 text-lg font-light max-md:mt-10 relative z-10">
                   Añadela a tu playlist personal
                 </div>
               </div>
             </div>
             <div className="flex flex-col ml-5 w-[27%] max-md:ml-0 max-md:w-full">
               <div className="flex flex-col grow text-white max-md:mt-10">
-                <div className="text-6xl font-semibold max-md:text-4xl">
+                <div className="text-6xl font-semibold max-md:text-4xl relative z-10">
                   03/
                 </div>
-                <div className="mt-11 text-lg font-light max-md:mt-10">
+                <div className="mt-11 text-lg font-light max-md:mt-10 relative z-10">
                   Compartela con todos tus amigos
                 </div>
+                
               </div>
             </div>
           </div>

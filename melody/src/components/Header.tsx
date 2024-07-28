@@ -2,16 +2,22 @@ import React from "react";
 import Link from 'next/link';
 
 
+interface HeaderProps {
+  className?: string;
+}
 
 
-export const Header = () => {
+export const Header: React.FC<HeaderProps> = ({ className }) => {
     return( 
-    <div className="backdrop-blur-sm flex gap-5 justify-between px-14 pt-3.5 pb-6 w-full bg-white bg-opacity-10 max-md:flex-wrap max-md:px-5 max-md:max-w-full">
+    
+    <div className="backdrop-blur-sm flex gap-5 justify-between px-14 pt-3.5 pb-6 w-full bg-white bg-opacity-10 max-md:flex-wrap max-md:px-5 max-md:max-w-full  ">
     <div className="text-xl text-white">
+      
       <span className="font-semibold">Melody</span>
       <br />
       Music Platform
     </div>
+    
     <nav className="flex gap-5 items-center self-start mt-2.5 max-md:flex-wrap">
       <div className="grow self-stretch my-auto text-base text-white uppercase">
         <Link href="/">
@@ -49,6 +55,8 @@ export const Header = () => {
         className="shrink-0 w-6 aspect-square"
       />
     </div>
+    
   </div>
+  
   );
 }

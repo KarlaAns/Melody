@@ -3,6 +3,8 @@ import Layout from './LayoutDashB';
 import MusicGenre from '../components/MusicGenre';
 import PlaylistCard from '../components/PlaylistCard';
 import ArtistCard from '../components/ArtistCard';
+import { SongCard } from "../components/SongCard";
+
 
 const Dashboard: React.FC = () => {
   const playlistImages = [
@@ -40,7 +42,18 @@ const Dashboard: React.FC = () => {
         </h1>
         <MusicGenre />
       </section>
-      <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/109684e1-fe97-4601-b449-12d5d2ea8a33?apiKey=a78f6d67d7bc412983425b620122d734&&apiKey=a78f6d67d7bc412983425b620122d734" className="mt-24 w-full aspect-[2.94] max-md:mt-10 max-md:max-w-full" alt="Music recommendation banner" />
+      {/* <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/109684e1-fe97-4601-b449-12d5d2ea8a33?apiKey=a78f6d67d7bc412983425b620122d734&&apiKey=a78f6d67d7bc412983425b620122d734" className="mt-24 w-full aspect-[2.94] max-md:mt-10 max-md:max-w-full" alt="Music recommendation banner" /> */}
+      <div className="flex gap-5 max-md:flex-col">
+            <SongCard 
+            songName=""
+            imageUrl=""/>
+            <SongCard 
+            songName=""
+            imageUrl=""/>
+            <SongCard 
+            songName=""
+            imageUrl=""/>
+          </div>
       <section className="flex flex-col items-center pl-11 mt-24 w-full max-md:pl-5 max-md:mt-10 max-md:max-w-full">
         <div className="self-stretch max-md:pr-5 max-md:max-w-full">
           <div className="flex gap-5 max-md:flex-col">
