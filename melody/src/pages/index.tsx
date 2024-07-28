@@ -100,7 +100,7 @@ const Home: React.FC = () => {
               <div className="grow max-md:mt-10 max-md:max-w-full">
                   <img
                     loading="lazy"
-                    src="/images/vinylDisc.png"
+                    src="/images/market.png"
                     className="max-w-full shadow-lg rgba(0, 0, 0, 0.3)"
                   />
               </div>
@@ -188,23 +188,41 @@ const Home: React.FC = () => {
         </div>
         <div className="mt-24 max-md:mt-10 max-md:max-w-full flex justify-center">
           <div className="flex gap-5 max-md:flex-col">
-            <SongCard />
-            <SongCard />
-            <SongCard />
+            <SongCard 
+            songName=""
+            imageUrl=""/>
+            <SongCard 
+            songName=""
+            imageUrl=""/>
+            <SongCard 
+            songName=""
+            imageUrl=""/>
           </div>
         </div>
         <div className="mt-24 max-md:mt-10 max-md:max-w-full flex justify-center">
           <div className="flex gap-5 max-md:flex-col">
-            <SongCard />
-            <SongCard />
-            <SongCard />
+            <SongCard 
+            songName=""
+            imageUrl=""/>
+            <SongCard 
+            songName=""
+            imageUrl=""/>
+            <SongCard 
+            songName=""
+            imageUrl=""/>
           </div>
         </div>
         <div className="mt-24 max-md:mt-10 max-md:max-w-full flex justify-center">
           <div className="flex gap-5 max-md:flex-col">
-            <SongCard />
-            <SongCard />
-            <SongCard />
+            <SongCard 
+            songName=""
+            imageUrl=""/>
+            <SongCard 
+            songName=""
+            imageUrl=""/>
+            <SongCard 
+            songName=""
+            imageUrl=""/>
           </div>
         </div>
         <div className="flex gap-2.5 self-center px-8 py-2.5 mt-16 text-lg font-light text-white border border-white border-solid rounded-[50px] max-md:px-5 max-md:mt-10">

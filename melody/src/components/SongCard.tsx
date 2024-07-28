@@ -1,17 +1,22 @@
 import * as React from "react";
 
-export const SongCard = () => {
+interface SongCardProps {
+  songName: string;
+  imageUrl: string;
+}
+
+export const SongCard: React.FC<SongCardProps> = ({ songName, imageUrl }) => {
   return (
-    <div className="flex flex-col bg-[#181818] text-white p-4 rounded-lg w-[368px] shadow-lg">
+    <div className="flex flex-col bg-[#181818] text-white p-4 rounded-lg w-[368px]">
       <div className="relative">
         <img
-          src="/images/Rectangle 9.png" 
+          src={imageUrl} 
           alt="Album Cover"
           className="object-cover w-full h-full rounded-t-lg"
         />
       </div>
       <div className="p-4">
-        <h2 className="text-xl font-semibold">Heart & Sol</h2>
+        <h2 className="text-xl font-semibold">{songName}</h2>
         <div className="flex items-center mt-2">
           <img
             src="https://cdn.builder.io/api/v1/image/assets/TEMP/2140260c93daee2e67615b07334bc768711ee7f934c2f620d4d8f2c280d54626?"
