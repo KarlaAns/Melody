@@ -1542,3 +1542,14 @@
     width: 24px;
   }
   
+  @layer components {
+    .all-\[unset\] {
+    all: unset;
+    }
+    }
+
+
+    :root {
+      --gray-4: rgba(189, 189, 189, 1);
+      --primary: rgba(149, 112, 255, 1);
+      }
