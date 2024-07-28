@@ -20,12 +20,12 @@ const Home: React.FC = () => {
             Dashboard
           </div>
           <div className="self-stretch my-auto text-base text-white uppercase">
-            DOwnload
+            Download
           </div>
           <div className="flex relative flex-col justify-center items-center self-stretch w-8 aspect-[1.07]">
             <img
               loading="lazy"
-              srcSet="..."
+              src="..."
               className="object-cover absolute inset-0 size-full"
             />
             <img
@@ -53,36 +53,47 @@ const Home: React.FC = () => {
           />
         </div>
       </div>
-      <div className="flex flex-col mt-48 ml-10 max-w-full text-white w-[671px] max-md:mt-10">
-        <div className="text-7xl max-md:max-w-full max-md:text-4xl">
-          Melody.
-        </div>
-        <div className="mt-4 text-6xl max-md:max-w-full max-md:text-4xl">
-          Music for everyone.
-        </div>
-        <div className="mt-9 text-base font-light leading-7 max-md:max-w-full">
-          Explora el extenso mundo de la música y atrevete a escuchar géneros de
-          mpusica y a artistas que nunca habías escuchado antes!
-        </div>
-        <div className="flex gap-5 justify-between self-start mt-16 max-md:mt-10">
-          <div className="flex flex-col self-start mt-1.5 text-sm">
-            <div>Powered by</div>
-            <img
-              loading="lazy"
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/90b269e4a4afbae1f441d1a571da5742db126e188f2b11f283dbcc514b4ed59a?"
-              className="self-center mt-2 aspect-[8.33] w-[102px]"
-            />
-          </div>
-          <div className="flex gap-2.5 px-8 py-2.5 text-lg font-light border border-white border-solid rounded-[50px] max-md:px-5">
-            <div>Discover More</div>
-            <img
-              loading="lazy"
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/41cdf6651b08f1a04e8fbc9f30ad6b350d71b5ced3924d31c7e4163b4be66bbf?"
-              className="shrink-0 my-auto w-6 aspect-square"
-            />
-          </div>
-        </div>
+      <div className="flex flex-row mt-48 ml-10 max-w-full max-md:mt-10">
+  <div className="flex flex-col text-white w-[671px] max-md:mt-10">
+    <div className="text-7xl max-md:max-w-full max-md:text-4xl">
+      Melody.
+    </div>
+    <div className="mt-4 text-6xl max-md:max-w-full max-md:text-4xl">
+      Music for everyone.
+    </div>
+    <div className="mt-9 text-base font-light leading-7 max-md:max-w-full">
+      Explora el extenso mundo de la música y atrévete a escuchar géneros de
+      música y a artistas que nunca habías escuchado antes!
+    </div>
+    <div className="flex gap-5 justify-between self-start mt-16 max-md:mt-10">
+      <div className="flex flex-col self-start mt-1.5 text-sm">
+        <div>Powered by</div>
+        <img
+          loading="lazy"
+          src="https:/cdn.builder.io/api/v1/image/assets/TEMP/90b269e4a4afbae1f441d1a571da5742db126e188f2b11f283dbcc514b4ed59a?"
+          className="self-center mt-2 aspect-[8.33] w-[102px]"
+        />
       </div>
+      <div className="flex gap-2.5 px-8 py-2.5 text-lg font-light border border-white border-solid rounded-[50px] max-md:px-5">
+        <div>Discover More</div>
+        <img
+          loading="lazy"
+          src="https://cdn.builder.io/api/v1/image/assets/TEMP/41cdf6651b08f1a04e8fbc9f30ad6b350d71b5ced3924d31c7e4163b4be66bbf?"
+          className="shrink-0 my-auto w-6 aspect-square"
+        />
+      </div>
+    </div>
+  </div>
+  <div className="ml-10">
+    <img
+      loading="lazy"
+      src="/images/image 5.png"
+      alt="Descripción de la imagen"
+      className="max-w-full h-auto"
+    />
+  </div>
+</div>
+
       <div className="flex gap-5 mt-52 text-2xl font-light text-white uppercase max-md:flex-wrap max-md:mt-10">
         <div className="grow my-auto">new way to reach the new fan</div>
         <img
