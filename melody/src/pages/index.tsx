@@ -6,28 +6,35 @@ import Footer from "../components/Footer";
 import GradientEllipses from "../components/GradientEllipses";
 import Ellipse21 from "../components/Ellipse21";
 import Marquee from '../components/Marquee';
-
 import axios from 'axios';
+import ReactPlayer from 'react-player';
+import { fetchSongDetails } from '../utils/spotify';
 
-const CLIENT_ID = '352717a76cfa46d18108a64a4fba3410';
-const CLIENT_SECRET = '454e7d3f3e9742a3b805d791afbd30b0';
+const CLIENT_ID = '';
+const CLIENT_SECRET = '';
 
 const Home: React.FC = () => {
   const [songs, setSongs] = useState<any[]>([]);
   const [selectedGenre, setSelectedGenre] = useState<string>('Pop');
+  const [currentSongUrl, setCurrentSongUrl] = useState<string | null>(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
+    console.log('Client ID:', CLIENT_ID);
+    console.log('Client Secret:', CLIENT_SECRET);
+
     const fetchData = async (genre: string) => {
       try {
-        const tokenResponse = await axios.post('https://accounts.spotify.com/api/token', null, {
-          params: {
-            grant_type: 'client_credentials'
-          },
+        const credentials = btoa(`${CLIENT_ID}:${CLIENT_SECRET}`);
+        console.log('Credentials:', credentials);  // Depuración de credenciales
+
+        const tokenResponse = await axios.post('https://accounts.spotify.com/api/token', 'grant_type=client_credentials', {
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
-            'Authorization': `Basic ${btoa(`${CLIENT_ID}:${CLIENT_SECRET}`)}`
+            'Authorization': `Basic ${credentials}`
           }
         });
+
+        console.log('Token Response:', tokenResponse.data);  // Depuración de la respuesta del token
 
         const accessToken = tokenResponse.data.access_token;
         const response = await axios.get(`https://api.spotify.com/v1/recommendations?seed_genres=${genre.toLowerCase()}`, {
@@ -35,10 +42,10 @@ const Home: React.FC = () => {
             'Authorization': `Bearer ${accessToken}`
           }
         });
-        
+
         setSongs(response.data.tracks);
       } catch (error) {
-        console.error(error);
+        console.error('Error fetching data:', error);  // Depuración de errores
       }
     };
 
@@ -48,18 +55,28 @@ const Home: React.FC = () => {
   const handleGenreClick = (genre: string) => {
     setSelectedGenre(genre);
   };
-  
+
+  const handlePlay = async (trackId: string) => {
+    try {
+      const songDetails = await fetchSongDetails(trackId);
+      setCurrentSongUrl(songDetails.preview_url);
+    } catch (error) {
+      console.error('Error fetching song details:', error);
+    }
+  };
+
   const genres = [
     "Pop",
     "Rock",
     "Jazz",
     "Electronic",
     "Classical",
-  ]
+  ];
   return (
     <div className="flex flex-col pb-20 bg-neutral-950 overflow-x-hidden">
       <div className="fixed top-0 left-0 w-full z-50">
         <Header />
+
       </div>
       <GradientEllipses />
 
@@ -123,13 +140,13 @@ const Home: React.FC = () => {
             </div>
             <Ellipse21 />
             <div className="grow max-md:mt-10 max-md:max-w-full z-0 p-0 m-0">
-  <img
-    loading="lazy"
-    srcSet="/images/queesmelody.png"
-    className="w-full h-auto shadow-lg"
-    style={{ display: 'block' }} // Elimina el margen interno si está presente
-  />
-</div>
+              <img
+                loading="lazy"
+                srcSet="/images/queesmelody.png"
+                className="w-full h-auto shadow-lg"
+                style={{ display: 'block' }} // Elimina el margen interno si está presente
+              />
+            </div>
 
           </div>
         </div>
@@ -193,6 +210,8 @@ const Home: React.FC = () => {
                   artist={song.artists.map((artist: any) => artist.name).join(", ")}
                   album={song.album.name}
                   coverUrl={song.album.images[0]?.url || ""}
+                  songUrl={song.preview_url || ""}
+                  onPlay={(url) => setCurrentSongUrl(url)}
                 />
               ))}
             </div>
@@ -211,14 +230,18 @@ const Home: React.FC = () => {
                 escuches los últimos hits sin descargar nada!
               </div>
             </div>
-            
+
           </div>
         </div>
       </div>
-      
-            <Footer />
+      <div className="fixed bottom-0 left-0 w-full z-50">
+        {currentSongUrl && (
+          <ReactPlayer url={currentSongUrl} playing={true} controls={true} width="100%" height="50px" />
+        )}
+      </div>
+      <Footer />
     </div>
-    
+
   );
 };
 
