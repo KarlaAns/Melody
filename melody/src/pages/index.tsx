@@ -10,8 +10,8 @@ import axios from 'axios';
 import ReactPlayer from 'react-player';
 import { fetchSongDetails } from '../utils/spotify';
 
-const CLIENT_ID = 'b70db89780dd4a3083e04f22c0357337';
-const CLIENT_SECRET = '327b86fbad964225b48f79269d7424c7';
+const CLIENT_ID = '';
+const CLIENT_SECRET = '';
 
 const Home: React.FC = () => {
   const [songs, setSongs] = useState<any[]>([]);

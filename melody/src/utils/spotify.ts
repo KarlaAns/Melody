@@ -1,8 +1,8 @@
 // spotify.ts
 import axios from 'axios';
 
-const CLIENT_ID = 'b70db89780dd4a3083e04f22c0357337';
-const CLIENT_SECRET = '327b86fbad964225b48f79269d7424c7';
+const CLIENT_ID = '';
+const CLIENT_SECRET = '';
 
 export const getAccessToken = async (): Promise<string> => {
   const response = await axios.post(
