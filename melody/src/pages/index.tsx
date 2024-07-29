@@ -2,6 +2,7 @@ import * as React from "react";
 import { useState, useEffect } from "react";
 import { SongCard } from "../components/SongCard";
 import { Header } from "../components/Header";
+import UserInfo from "@/components/UserInfo";
 import Footer from "../components/Footer";
 import GradientEllipses from "../components/GradientEllipses";
 import Ellipse21 from "../components/Ellipse21";
@@ -10,8 +11,8 @@ import axios from 'axios';
 import ReactPlayer from 'react-player';
 import { fetchSongDetails } from '../utils/spotify';
 
-const CLIENT_ID = '';
-const CLIENT_SECRET = '';
+const CLIENT_ID = 'b70db89780dd4a3083e04f22c0357337';
+const CLIENT_SECRET = '327b86fbad964225b48f79269d7424c7';
 
 const Home: React.FC = () => {
   const [songs, setSongs] = useState<any[]>([]);

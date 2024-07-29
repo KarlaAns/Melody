@@ -1,40 +1,52 @@
 import React from 'react';
 
-
-
-
 interface FooterProps {
   className?: string;
 }
 
 const Footer: React.FC<FooterProps> = ({ className }) => {
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth' // Añade un desplazamiento suave
+    });
+  };
+
   return (
-    <footer className="flex flex-col px-10 w-full text-white mt-[60px] max-md:px-5 max-md:mt-10 max-md:max-w-full ">
-      <h2 className="text-5xl max-md:max-w-full max-md:text-4xl">Shape the NFT Music</h2>
-      <div className="flex gap-2.5 mt-11 max-md:flex-wrap max-md:mt-10">
-        <div className="flex flex-col self-start mt-3">
-          <div className="text-3xl">Facebook</div>
-          <div className="mt-14 text-lg max-md:mt-10">Privacy Policy</div>
-        </div>
-        <div className="flex flex-col grow shrink-0 basis-0 w-fit max-md:max-w-full">
-          <nav className="flex gap-5 justify-between w-full text-3xl max-md:flex-wrap max-md:pr-5 max-md:max-w-full">
-            <div className="flex gap-5 whitespace-nowrap max-md:flex-wrap">
-              <div className="shrink-0 w-px h-12 border border-white border-solid" />
-              <div className="flex-auto my-auto">Twittter</div>
-              <div className="shrink-0 w-px h-12 border border-white border-solid" />
-              <div className="flex-auto my-auto">Medium</div>
-              <div className="shrink-0 w-px h-12 border border-white border-solid" />
-              <div className="flex-auto my-auto">Contact</div>
-            </div>
-            <div className="flex gap-2.5 my-auto">
-              <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/712ea870b69e1bdd9c6b6c146936f8e3f87fb4ae4ba62c996a030ed3be0c0994?apiKey=a78f6d67d7bc412983425b620122d734&&apiKey=a78f6d67d7bc412983425b620122d734" className="shrink-0 self-start w-6 aspect-square" alt="" />
-              <div className="flex-auto">Back to the top</div>
-            </div>
-          </nav>
-          <div className="flex gap-5 mt-11 text-lg max-md:flex-wrap max-md:mt-10 max-md:max-w-full">
-            <div className="flex-auto">Terms and Conditions</div>
-            <div className="flex-auto">Copyright © 2022 Avi Yansah</div>
+    <footer className={`flex flex-col px-10 w-full text-white mt-[150px] max-md:px-5 max-md:mt-8 ${className} bg-[#232323] relative`}>
+      {/* White Line at the Top */}
+      <div className="w-full h-1 bg-white"></div>
+
+      <h2 className="text-4xl font-bold mb-8 max-md:text-3xl">Shape the NFT Music</h2>
+      <div className="flex flex-col gap-6 max-md:gap-4">
+        <div className="flex flex-col md:flex-row md:justify-between">
+          <div className="flex flex-col gap-4 text-lg">
+            <div className="font-semibold text-xl">Facebook</div>
+            <div className="text-base">Privacy Policy</div>
           </div>
+          <div className="flex flex-col md:flex-row gap-4 md:gap-8 mt-4 md:mt-0">
+            <div className="flex flex-grow gap-4 items-center justify-center md:justify-between text-xl">
+              <div className="w-full border-t border-white" />
+              <div>Twitter</div>
+              <div className="w-full border-t border-white" />
+              <div>Medium</div>
+              <div className="w-full border-t border-white" />
+              <div>Contact</div>
+            </div>
+            <div className="flex items-center gap-4 cursor-pointer" onClick={scrollToTop}>
+              <img
+                loading="lazy"
+                src="/images/arrow-up-circle 1.svg"
+                className="w-8 h-8"
+                alt="Back to top"
+              />
+              <span>Back to the top</span>
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-col md:flex-row gap-4 text-base mt-4 md:mt-8">
+          <div className="flex-grow text-center md:text-left">Terms and Conditions</div>
+          <div className="text-center md:text-right">2024</div>
         </div>
       </div>
     </footer>
