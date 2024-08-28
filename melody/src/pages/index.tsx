@@ -2,82 +2,143 @@ import * as React from "react";
 import { useState, useEffect } from "react";
 import { SongCard } from "../components/SongCard";
 import { Header } from "../components/Header";
-import UserInfo from "@/components/UserInfo";
 import Footer from "../components/Footer";
 import GradientEllipses from "../components/GradientEllipses";
 import Ellipse21 from "../components/Ellipse21";
-import Marquee from '../components/Marquee';
-import axios from 'axios';
-import ReactPlayer from 'react-player';
-import { fetchSongDetails } from '../utils/spotify';
-
-const CLIENT_ID = 'b70db89780dd4a3083e04f22c0357337';
-const CLIENT_SECRET = '327b86fbad964225b48f79269d7424c7';
+import Marquee from "../components/Marquee";
+import {
+  spotifyApi,
+  loginUrl,
+  getTokenFromUrl,
+  setAccessToken,
+} from "../utils/spotify";
+import { useRouter } from "next/router";
 
 const Home: React.FC = () => {
-  const [songs, setSongs] = useState<any[]>([]);
-  const [selectedGenre, setSelectedGenre] = useState<string>('Pop');
-  const [currentSongUrl, setCurrentSongUrl] = useState<string | null>(null);
+  const [songs, setSongs] = useState<SpotifyApi.TrackObjectFull[]>([]);
+  const [selectedGenre, setSelectedGenre] = useState<string>("Pop");
+  const [token, setToken] = useState<string | null>(null);
+  const [player, setPlayer] = useState<Spotify.Player | null>(null);
+  const [deviceId, setDeviceId] = useState<string | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
-    console.log('Client ID:', CLIENT_ID);
-    console.log('Client Secret:', CLIENT_SECRET);
+    const token = localStorage.getItem('spotify_access_token');
+    
+
+    if (token) {
+      setToken(token);
+      setAccessToken(token);
+
+      const script = document.createElement("script");
+      script.src = "https://sdk.scdn.co/spotify-player.js";
+      script.async = true;
+
+      document.body.appendChild(script);
+
+      window.onSpotifyWebPlaybackSDKReady = () => {
+        const player = new Spotify.Player({
+          name: "Melody Web Player",
+          getOAuthToken: (cb) => {
+            cb(token);
+          },
+        });
+
+        setPlayer(player);
+
+        player.addListener("ready", ({ device_id }) => {
+          console.log("Ready with Device ID", device_id);
+          setDeviceId(device_id);
+        });
+
+        player.addListener("not_ready", ({ device_id }) => {
+          console.log("Device ID has gone offline", device_id);
+        });
+
+        player.addListener("initialization_error", ({ message }) => {
+          console.error("Failed to initialize", message);
+        });
+
+        player.addListener("authentication_error", ({ message }) => {
+          console.error("Failed to authenticate", message);
+        });
+
+        player.addListener("account_error", ({ message }) => {
+          console.error("Failed to validate Spotify account", message);
+        });
+
+        player.connect().then((success) => {
+          if (success) {
+            console.log(
+              "The Web Playback SDK successfully connected to Spotify!"
+            );
+          }
+        });
+      };
+
+      return () => {
+        document.body.removeChild(script);
+      };
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!token) return;
 
     const fetchData = async (genre: string) => {
       try {
-        const credentials = btoa(`${CLIENT_ID}:${CLIENT_SECRET}`);
-        console.log('Credentials:', credentials);  // Depuración de credenciales
-
-        const tokenResponse = await axios.post('https://accounts.spotify.com/api/token', 'grant_type=client_credentials', {
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Authorization': `Basic ${credentials}`
-          }
+        const response = await spotifyApi.getRecommendations({
+          seed_genres: [genre.toLowerCase()],
         });
-
-        console.log('Token Response:', tokenResponse.data);  // Depuración de la respuesta del token
-
-        const accessToken = tokenResponse.data.access_token;
-        const response = await axios.get(`https://api.spotify.com/v1/recommendations?seed_genres=${genre.toLowerCase()}`, {
-          headers: {
-            'Authorization': `Bearer ${accessToken}`
-          }
-        });
-
-        setSongs(response.data.tracks);
+        setSongs(response.tracks as SpotifyApi.TrackObjectFull[]);
       } catch (error) {
-        console.error('Error fetching data:', error);  // Depuración de errores
+        console.error("Error fetching data:", error);
       }
     };
 
     fetchData(selectedGenre);
-  }, [selectedGenre]);
+  }, [selectedGenre, token]);
 
   const handleGenreClick = (genre: string) => {
     setSelectedGenre(genre);
   };
 
-  const handlePlay = async (trackId: string) => {
-    try {
-      const songDetails = await fetchSongDetails(trackId);
-      setCurrentSongUrl(songDetails.preview_url);
-    } catch (error) {
-      console.error('Error fetching song details:', error);
+  const handlePlay = async (trackUri: string) => {
+    if (player && deviceId) {
+      try {
+        await spotifyApi.play({
+          device_id: deviceId,
+          uris: [trackUri],
+        });
+      } catch (error) {
+        console.error("Error playing track:", error);
+      }
+    } else {
+      console.error("Player or device ID not available");
     }
   };
 
-  const genres = [
-    "Pop",
-    "Rock",
-    "Jazz",
-    "Electronic",
-    "Classical",
-  ];
+  
+
+  const genres = ["Pop", "Rock", "Jazz", "Electronic", "Classical"];
+
+  if (!token) {
+    return (
+      <div className="flex items-center justify-center h-screen bg-neutral-950">
+        <a
+          href={loginUrl}
+          className="px-6 py-3 text-white bg-green-500 rounded-full hover:bg-green-600"
+        >
+          Login with Spotify
+        </a>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col pb-20 bg-neutral-950 overflow-x-hidden">
       <div className="fixed top-0 left-0 w-full z-50">
         <Header />
-
       </div>
       <GradientEllipses />
 
@@ -90,8 +151,8 @@ const Home: React.FC = () => {
             Music for everyone.
           </div>
           <div className="mt-9 text-base font-light leading-7 max-md:max-w-full">
-            Explora el extenso mundo de la música y atrévete a escuchar géneros de
-            música y a artistas que nunca habías escuchado antes!
+            Explora el extenso mundo de la música y atrévete a escuchar géneros
+            de música y a artistas que nunca habías escuchado antes!
           </div>
           <div className="flex gap-5 justify-between self-start mt-16 max-md:mt-10">
             <div className="flex flex-col self-start mt-1.5 text-sm">
@@ -145,10 +206,9 @@ const Home: React.FC = () => {
                 loading="lazy"
                 srcSet="/images/queesmelody.png"
                 className="w-full h-auto shadow-lg"
-                style={{ display: 'block' }} // Elimina el margen interno si está presente
+                style={{ display: "block" }} // Elimina el margen interno si está presente
               />
             </div>
-
           </div>
         </div>
         <div className="self-center mt-20 w-full max-w-[1171px] max-md:mt-10 max-md:max-w-full">
@@ -204,15 +264,15 @@ const Home: React.FC = () => {
               ))}
             </div>
             <div className="flex flex-wrap gap-6 justify-center mt-20 max-md:mt-10">
-              {songs.map((song, index) => (
+              {songs.map((song) => (
                 <SongCard
                   key={song.id}
                   title={song.name}
-                  artist={song.artists.map((artist: any) => artist.name).join(", ")}
+                  artist={song.artists.map((artist) => artist.name).join(", ")}
                   album={song.album.name}
                   coverUrl={song.album.images[0]?.url || ""}
-                  songUrl={song.preview_url || ""}
-                  onPlay={(url) => setCurrentSongUrl(url)}
+                  songUri={song.uri}
+                  onPlay={handlePlay}
                 />
               ))}
             </div>
@@ -231,18 +291,11 @@ const Home: React.FC = () => {
                 escuches los últimos hits sin descargar nada!
               </div>
             </div>
-
           </div>
         </div>
       </div>
-      <div className="fixed bottom-0 left-0 w-full z-50">
-        {currentSongUrl && (
-          <ReactPlayer url={currentSongUrl} playing={true} controls={true} width="100%" height="50px" />
-        )}
-      </div>
       <Footer />
     </div>
-
   );
 };
 

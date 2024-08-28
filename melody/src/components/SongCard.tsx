@@ -1,4 +1,3 @@
-// SongCard.tsx
 import React from "react";
 
 interface SongCardProps {
@@ -6,11 +5,11 @@ interface SongCardProps {
   artist: string;
   album: string;
   coverUrl: string;
-  songUrl: string; 
-  onPlay: (songUrl: string) => void;
+  songUri: string; 
+  onPlay: (songUri: string) => void;
 }
 
-export const SongCard: React.FC<SongCardProps> = ({ title, coverUrl, album, artist, songUrl, onPlay }) => {
+export const SongCard: React.FC<SongCardProps> = ({ title, coverUrl, album, artist, songUri, onPlay }) => {
   return (
     <div className="flex flex-col bg-[#181818] text-white p-4 rounded-lg w-[368px]">
       <div className="relative">
@@ -32,7 +31,7 @@ export const SongCard: React.FC<SongCardProps> = ({ title, coverUrl, album, arti
           <span className="ml-4 text-sm">Free</span>
         </div>
         <div className="flex mt-4">
-          <button onClick={() => onPlay(songUrl)} className="flex items-center justify-center gap-2 px-4 py-2 mr-2 text-sm font-light text-white border border-white rounded-full">
+          <button onClick={() => onPlay(songUri)} className="flex items-center justify-center gap-2 px-4 py-2 mr-2 text-sm font-light text-white border border-white rounded-full">
             Play now
             <img
               src="https://cdn.builder.io/api/v1/image/assets/TEMP/2140260c93daee2e67615b07334bc768711ee7f934c2f620d4d8f2c280d54626?"
