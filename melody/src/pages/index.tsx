@@ -10,9 +10,10 @@ import Marquee from '../components/Marquee';
 import axios from 'axios';
 import ReactPlayer from 'react-player';
 import { fetchSongDetails } from '../utils/spotify';
+import { downloadFromSpotify } from './api/spotify/spotifyService';
 
-const CLIENT_ID = 'b70db89780dd4a3083e04f22c0357337';
-const CLIENT_SECRET = '327b86fbad964225b48f79269d7424c7';
+const CLIENT_ID = '440034eed014419580e8218f42130f03';
+const CLIENT_SECRET = 'd9d39e8589074a3ea18ae2aff24d2b20';
 
 const Home: React.FC = () => {
   const [songs, setSongs] = useState<any[]>([]);
@@ -73,6 +74,43 @@ const Home: React.FC = () => {
     "Electronic",
     "Classical",
   ];
+
+  const handleAddToPlaylist = async (id: string) => {
+    try {
+      // Descargar la canción desde Spotify
+      const songDetails = await fetchSongDetails(id);
+      const previewUrl = songDetails.preview_url;
+
+      console.log('Song Details:', songDetails);
+      console.log('Preview URL:', previewUrl);
+
+      
+      if (previewUrl) {
+        // Descargar el archivo de la canción
+        const response = await axios.get(previewUrl, { responseType: 'arraybuffer' });
+        const fileData = Buffer.from(response.data).toString('base64');
+
+
+        // Subir la canción a PostgreSQL
+        await axios.post('/api/files/upload', {
+          trackId: id,
+          filename: `${songDetails.name}-${songDetails.artists.map((a: any) => a.name).join('-')}.mp3`,
+          title: songDetails.name,
+          artist: songDetails.artists.map((a: any) => a.name).join(', '),
+          album: songDetails.album.name,
+          duration: songDetails.duration_ms,
+          fileData: fileData,
+        });
+
+        // Puedes hacer algo después de la carga, como mostrar un mensaje
+        alert('Canción añadida a la lista de reproducción!');
+      }
+    } catch (error) {
+      console.error('Error adding song to playlist:', error);
+    }
+  };
+
+
   return (
     <div className="flex flex-col pb-20 bg-neutral-950 overflow-x-hidden">
       <div className="fixed top-0 left-0 w-full z-50">
@@ -204,17 +242,19 @@ const Home: React.FC = () => {
               ))}
             </div>
             <div className="flex flex-wrap gap-6 justify-center mt-20 max-md:mt-10">
-              {songs.map((song, index) => (
-                <SongCard
-                  key={song.id}
-                  title={song.name}
-                  artist={song.artists.map((artist: any) => artist.name).join(", ")}
-                  album={song.album.name}
-                  coverUrl={song.album.images[0]?.url || ""}
-                  songUrl={song.preview_url || ""}
-                  onPlay={(url) => setCurrentSongUrl(url)}
-                />
-              ))}
+            {songs.map((song) => (
+  <SongCard
+    key={song.id}
+    id={song.id} // Pasar el ID de la canción
+    title={song.name || 'Unknown Title'}
+    artist={song.artists?.[0]?.name || 'Unknown Artist'}
+    album={song.album?.name || 'Unknown Album'}
+    coverUrl={song.album.images[0]?.url || ""}
+    songUrl={song.preview_url || ""}
+    onPlay={(url) => setCurrentSongUrl(url)}
+    onAddToPlaylist={(id) => handleAddToPlaylist(id)} // Ajustar la función
+  />
+))}
             </div>
           </div>
         </div>

@@ -1,16 +1,17 @@
-// SongCard.tsx
 import React from "react";
 
 interface SongCardProps {
+  id: string; // Añadir esta línea para recibir el ID de la canción
   title: string;
   artist: string;
   album: string;
   coverUrl: string;
   songUrl: string; 
   onPlay: (songUrl: string) => void;
+  onAddToPlaylist: (id: string) => void; // Cambia esta función para recibir el ID de la canción
 }
 
-export const SongCard: React.FC<SongCardProps> = ({ title, coverUrl, album, artist, songUrl, onPlay }) => {
+export const SongCard: React.FC<SongCardProps> = ({ id, title, coverUrl, album, artist, songUrl, onPlay, onAddToPlaylist }) => {
   return (
     <div className="flex flex-col bg-[#181818] text-white p-4 rounded-lg w-[368px]">
       <div className="relative">
@@ -40,7 +41,7 @@ export const SongCard: React.FC<SongCardProps> = ({ title, coverUrl, album, arti
               className="w-4 h-4"
             />
           </button>
-          <button className="px-6 py-2 text-sm font-bold text-white bg-gradient-to-r from-green-400 to-blue-500 rounded-full">
+          <button onClick={() => onAddToPlaylist(id)} className="px-6 py-2 text-sm font-bold text-white bg-gradient-to-r from-green-400 to-blue-500 rounded-full">
             ADD TO PLAYLIST
           </button>
         </div>
